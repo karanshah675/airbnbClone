@@ -4,7 +4,7 @@ const app = express();
 const path = require("path");
 const Listing = require("./models/listing");
 const methodOverride = require("method-override");
-
+const engine = require('ejs-mate');
 app.use(methodOverride("_method"));
 mongoose
   .connect("mongodb://127.0.0.1:27017/airBnb")
@@ -14,7 +14,7 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-
+app.engine('ejs', engine);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 app.use(express.urlencoded({ extended: true }));
@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 //*index route
 app.get("/listing", async (req, res) => {
   let data = await Listing.find({});
-  res.render("index.ejs", { data });
+  res.render("listings/index.ejs", { data });
 });
 
 //*add route
