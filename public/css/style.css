@@ -9,9 +9,11 @@
 body {
   font-family: "Poppins", sans-serif;
   font-style: normal;
+  position: relative;
 }
 
 .navbar {
+  background-color: #f7f7f7;
   height: 80px;
   padding: 0 50px;
   display: flex;
@@ -19,15 +21,17 @@ body {
   justify-content: space-between;
   border-bottom: 1px solid #eee;
   background: white;
-  position: sticky;
+  position: fixed;
+  width: 100%;
   top: 0;
+  left: 0;
   border-bottom: 1px solid rgba(128, 128, 128, 0.353);
 }
 
 .logo {
   text-decoration: none;
   color: #ff385c;
-  font-size: 25px;
+  font-size: 30px;
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -91,8 +95,54 @@ body {
   color: #777;
 }
 
+/*main*/
+.container {
+  padding: 0 30px;
+}
+/**footer*/
+footer {
+  padding: 30px;
+  height: 11rem;
+  border-top: 1px solid rgba(176, 173, 173, 0.353);
+  display: flex;
+  background-color: #f7f7f7;
+  justify-content: space-between;
+  width: 100%;
+  /* position: fixed; */
+  bottom: 0;
+  flex-wrap: wrap;
+}
+.f-company-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.f-company-details a {
+  color: #222;
+  text-decoration: none;
+}
+.f-company-details a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+.f-socials {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
 @media (max-width: 768px) {
   .navbar {
     padding: 0 20px;
+  }
+  footer {
+    flex-direction: column-reverse;
+    font-size: 13px;
+  }
+  .f-company-details p{
+    width: 100%;
+  }
+  
+  .f-company-details span:nth-child(2){
+    display: none;
   }
 }
