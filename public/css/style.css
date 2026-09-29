@@ -21,8 +21,8 @@ body {
   justify-content: space-between;
   border-bottom: 1px solid #eee;
   background: white;
-  position: fixed;
-  width: 100%;
+  position: sticky;
+  /* width: 100%; */
   top: 0;
   left: 0;
   border-bottom: 1px solid rgba(128, 128, 128, 0.353);
@@ -96,8 +96,34 @@ body {
 }
 
 /*main*/
-.container {
+.main {
   padding: 0 30px;
+}
+.image {
+  position: relative;
+  z-index: -1;
+}
+.outline-text {
+  font-family: "Arial", sans-serif;
+  font-size: 90px;
+  font-weight: bold;
+  text-transform: capitalize;
+
+  /* Makes the inside of the text see-through */
+  color: transparent;
+
+  /* Creates the outline (Width and Color) */
+  -webkit-text-stroke: 1px #fff;
+}
+
+.image-ovelay {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+}
+.image-ovelay h4{
+  font-size: 25px;
+ color: #fff;
 }
 /**footer*/
 footer {
@@ -138,11 +164,11 @@ footer {
     flex-direction: column-reverse;
     font-size: 13px;
   }
-  .f-company-details p{
+  .f-company-details p {
     width: 100%;
   }
-  
-  .f-company-details span:nth-child(2){
+
+  .f-company-details span:nth-child(2) {
     display: none;
   }
 }
