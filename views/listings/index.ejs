@@ -1,13 +1,37 @@
-<% layout("/layouts/boilerplate") %> 
-<body>
-  <div class="main">
+<% layout("/layouts/boilerplate") %>
 
-    <form action="/listing/new" method="get">
-      <button>Add new</button>
-    </form>
-    <h3>all listing</h3>
-    <% for(d of data){ %>
-      <li><a href="listing/<%= d.id %>/show"><%= d.title %></a></li>
-      <%}%>
+<div class="main">
+
+    <h3 class="list-heading">all listings</h3>
+
+    <div class="listings d-flex flex-wrap gap-3">
+
+        <% for(d of data){ %>
+          <a href="listing/<%= d.id %>/show">
+            <div class="place-card">
+
+                <div class="card-image">
+                    <img src="<%= d.image %>" alt="<%= d.title %>">
+                </div>
+
+                <div class="c-title">
+                    <%= d.title %>
+                </div>
+
+                <div class="c-country">
+                    <i class="fa-solid fa-location-dot"
+                       style="color: rgb(133, 134, 134);"></i>
+                    <%= d.location %>, <%= d.country %>
+                </div>
+
+                <div class="c-price">
+                    <%= d.price.toLocaleString("en-IN") %>/night
+                </div>
+
+            </div>
+</a>
+        <% } %>
+
     </div>
-    </body>
+
+</div>

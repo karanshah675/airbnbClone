@@ -46,7 +46,7 @@ app.post("/listing", (req, res) => {
     .save()
     .then(() => {
       console.log("data saved");
-      res.redirect("index.ejs");
+      res.redirect("listings/index.ejs");
     })
     .catch((err) => {
       console.log(err);
@@ -54,20 +54,20 @@ app.post("/listing", (req, res) => {
 });
 
 app.get("/listing/new", (req, res) => {
-  res.render("new.ejs");
+  res.render("listings/new.ejs");
 });
 //*show route
 app.get("/listing/:id/show", async (req, res) => {
   let { id } = req.params;
   let data = await Listing.findById(id);
-  res.render("show.ejs", { data });
+  res.render("listings/show.ejs", { data });
 });
 
 //*edit route
 app.get("/listing/:id/edit", async (req, res) => {
   let { id } = req.params;
   let data = await Listing.findById(id);
-  res.render("edit.ejs", { data });
+  res.render("listings/edit.ejs", { data });
 });
 //*put route
 app.put("/listing/:id", (req, res) => {
