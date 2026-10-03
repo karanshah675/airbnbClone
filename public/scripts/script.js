@@ -30,14 +30,10 @@ gsap.fromTo(
     },
   },
 );
-// document.querySelector(".cont").addEventListener("mousemove", (e) => {
-//   gsap.to(".dot", {
-//     x: e.clientX,
-//     y: e.clientY,
-//   });
-//   console.log(e);
-// });
-// let dot = document.querySelector(".dot");
-// document.querySelector(".outline-text").addEventListener("mousemove", (e) => {
-//   dot.style.zIndex = 1;
-// });
+document.querySelector(".cont").addEventListener("mousemove", (e) => {
+  gsap.to(".dot", {
+    x: e.clientX,
+    y: e.clientY,
+  }); 
+});
+ 

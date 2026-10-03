@@ -1,23 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>add list</title>
-  </head>
-  <body>
-    <form action="/listing" method="post">
-      <input type="text" name="title" placeholder="title" />
-      <br />
-      <textarea name="description" id="" placeholder="description"></textarea>
-      <br />
-      <input type="number" name="price" placeholder="price" />
-      <br />
-      <input type="text" placeholder="location" name="location" />
-      <br />
-      <input type="text" placeholder="country" name="country" />
-      <br />
-      <button>submit</button>
-    </form>
-  </body>
-</html>
+<% layout("/layouts/boilerplate") %>
+
+<div class="new-listing-page">
+
+    <div classbox-shadow: 0 0 0 3px rgba(255, 56, 92, 0.1);="new-listing-card">
+
+        <div class="form-header">
+            <h1>Add a new listing</h1>
+            <p>Share a beautiful place with your guests.</p>
+        </div>
+
+        <form action="/listing" method="POST">
+
+            <!-- Title -->
+            <div class="form-group">
+                <label for="title">Listing title</label>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="e.g. Beautiful Beach House"
+                    required
+                >
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="5"
+                    placeholder="Tell guests about this place..."
+                    required
+                ></textarea>
+            </div>
+
+            <!-- Price + Location -->
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label for="price">Price per night</label>
+                    <div class="input-with-symbol">
+                        <span>₹</span>
+                        <input
+                            type="number"
+                            id="price"
+                            name="price"
+                            placeholder="2500"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input
+                        type="text"
+                        id="location"
+                        name="location"
+                        placeholder="Goa"
+                        required
+                    >
+                </div>
+
+            </div>
+
+            <!-- Country -->
+            <div class="form-group">
+                <label for="country">Country</label>
+                <input
+                    type="text"
+                    id="country"
+                    name="country"
+                    placeholder="India"
+                    required
+                >
+            </div>
+
+            <!-- Image -->
+            <div class="form-group">
+                <label for="image">Image URL</label>
+                <input
+                    type="text"
+                    id="image"
+                    name="image"
+                    placeholder="https://example.com/image.jpg"
+                    required
+                >
+            </div>
+
+            <button class="add-listing-btn" type="submit">
+                Add Listing
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
