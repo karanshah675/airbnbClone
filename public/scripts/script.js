@@ -34,6 +34,12 @@ document.querySelector(".cont").addEventListener("mousemove", (e) => {
   gsap.to(".dot", {
     x: e.clientX,
     y: e.clientY,
-  }); 
+  });
 });
+
+let verfiyBtn = document.getElementById("verify");
+let previewImg = document.querySelector("#previewImg");
  
+verfiyBtn.addEventListener("click", () => {
+  previewImg.src = document.querySelector("#image").value;
+}); 
