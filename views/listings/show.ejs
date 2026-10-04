@@ -1,25 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= data.title %></title>
-</head>
-<body>
+<% layout("/layouts/boilerplate") %>
 
-  
-    <ul>
-        <li><%= data.title %></li>
-        <li><%= data.description %></li>
-        <li><%= data.price.toLocaleString("en-in") %></li>
-        <li><%= data.location %></li>
-        <li><%= data.country %></li>
-        <li><form action="/listing/<%= data.id %>/edit" method="get">
-            <button>Edit list</button>
-        </form></li>
-        <li><form action="/listing/<%= data._id %>?_method=DELETE" method="post">
-            <button>Delete list</button>
-        </form></li>
-    </ul>
-</body>
-</html>
+<div class="new-listing-page d-flex justify-content-center align-items-center">
+  <div class="show-card">
+    <div class="show-header">
+      <h4 class="fw-bold"><%= data.title %></h4>
+      <p class="text-secondary">
+        <%= data.location %> &middot; <%= data.country %>
+      </p>
+      <img src="<%= data.image %>" class="rounded" alt="" width="300px" height="200px" />
+    </div>
+    <div class="show-side d-flex justify-content-center align-items-start flex-column mt-5">
+      <p><%= data.description %></p>
+      <p class="fw-bold"> <span>₹</span> <%= data.price.toLocaleString("en-IN") %>/night </p>
+      <div class="show-btns d-flex justify-content-center align-items-center gap-3">
+        <form action="/listing/<%= data.id %>/edit" method="get">
+          <button class="border-0 p-2 rounded">Edit list</button>
+        </form>
+        <form action="/listing/<%= data._id %>?_method=DELETE" method="post">
+          <button class="border-0 p-2 rounded">Delete list</button>
+        </form>
+      </div>
+    </div>
+  </div>
+ 
+</div>

@@ -4,7 +4,7 @@ const app = express();
 const path = require("path");
 const Listing = require("./models/listing");
 const methodOverride = require("method-override");
-const engine = require('ejs-mate');
+const engine = require("ejs-mate");
 app.use(methodOverride("_method"));
 mongoose
   .connect("mongodb://127.0.0.1:27017/airBnb")
@@ -14,10 +14,10 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-app.engine('ejs', engine);
+app.engine("ejs", engine);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.listen(8080, () => {
   console.log("server started");
@@ -72,13 +72,14 @@ app.get("/listing/:id/edit", async (req, res) => {
 //*put route
 app.put("/listing/:id", (req, res) => {
   let { id } = req.params;
-  let { title, discription, price, location, country } = req.body;
+  let { title, discription, image, price, location, country } = req.body;
   Listing.findByIdAndUpdate(id, {
     title: title,
     discription: discription,
     price: price,
     location: location,
     country: country,
+    image: image,
   })
     .then((res2) => {
       console.log("data updated");
