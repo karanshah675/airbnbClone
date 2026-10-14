@@ -46,7 +46,7 @@ app.post("/listing", (req, res) => {
     .save()
     .then(() => {
       console.log("data saved");
-      res.redirect("listings/index.ejs");
+      res.redirect("/listing");
     })
     .catch((err) => {
       console.log(err);

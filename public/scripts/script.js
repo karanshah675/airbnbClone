@@ -43,3 +43,4 @@ let previewImg = document.querySelector("#previewImg");
 verfiyBtn.addEventListener("click", () => {
   previewImg.src = document.querySelector("#image").value;
 }); 
+

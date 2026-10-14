@@ -1,117 +1,139 @@
 <% layout("/layouts/boilerplate") %>
 
- 
- 
-    <div class="new-listing-page">
-
-    <div class="new-listing-card">
-
-        <div class="form-header">
-            <h1>Edit listing</h1>
-        </div>
-
-       <form action="/listing/<%= data._id %>?_method=PUT" method="post">
-
-            <!-- Title -->
-            <div class="form-group">
-                <label for="title">Listing title</label>
-                <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    placeholder="<%= data.title %>"
-                    required
-                >
-            </div>
-
-            <!-- Description -->
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea
-                    id="description"
-                    name="description"
-                    rows="5"
-                    placeholder="<%= data.description %>"
-                    required
-                ></textarea>
-            </div>
-
-            <!-- Price + Location -->
-            <div class="form-row">
-
-                <div class="form-group">
-                    <label for="price">Price per night</label>
-                    <div class="input-with-symbol">
-                        <span>₹</span>
-                        <input
-                            type="number"
-                            id="price"
-                            name="price"
-                           placeholder="<%= data.price %>"
-                            required
-                        >
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="location">Location</label>
-                    <input
-                        type="text"
-                        id="location"
-                        name="location"
-                        placeholder="<%= data.location %>"
-                        required
-                    >
-                </div>
-
-            </div>
-
-            <!-- Country -->
-            <div class="form-group">
-                <label for="country">Country</label>
-                <input
-                    type="text"
-                    id="country"
-                    name="country"
-                    placeholder="<%= data.country %>"
-                    required
-                >
-            </div>
-
-            <!-- Image -->
-            <div class="form-group">
-                <label for="image">Image URL</label>
-                <input
-                    type="text"
-                    id="image"
-                    name="image"
-                    placeholder="https://example.com/image.jpg"
-                    required
-                >
-                
-                  <button class="add-listing-btn w-50 mt-3" id="verify"  type="button">verify</button>
-                 
-                <div class="privew">
-                  <p class="mt-4">image preview</p>
-                  <img src="<%= data.image %>" alt="" class="rounded w-50 h-50" id="previewImg">
-                </div>
-            </div>
-
-            <button class="add-listing-btn" type="submit">
-                Edit Listing
-            </button>
-
-        </form>
-
+<div class="new-listing-page">
+  <div class="new-listing-card">
+    <div class="form-header">
+      <h1>Edit listing</h1>
     </div>
 
+    <form action="/listing/<%= data._id %>?_method=PUT" novalidate class="needs-validation"  method="post">
+      <!-- Title -->
+      <div class="form-group">
+        <label for="title">Listing title</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value="<%= data.title %>"
+          required
+          />
+          <div class="invalid-feedback">please add title</div>
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          rows="5"
+     
+          required
+        ><%= data.description %></textarea>
+          <div class="invalid-feedback">please add description</div>
+
+      </div>
+
+      <!-- Price + Location -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="price">Price per night</label>
+          <div class="input-with-symbol">
+            <span>₹</span>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              value="<%= data.price %>"
+              required
+            />
+          </div>
+          <div class="invalid-feedback">please add price</div>
+
+        </div>
+
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            value="<%= data.location %>"
+            required
+          />
+          <div class="invalid-feedback">please add location</div>
+
+        </div>
+      </div>
+
+      <!-- Country -->
+      <div class="form-group">
+        <label for="country">Country</label>
+        <input
+          type="text"
+          id="country"
+          name="country"
+          value="<%= data.country %>"
+          required
+        />
+          <div class="invalid-feedback">please add country</div>
+
+      </div>
+
+      <!-- Image -->
+      <div class="form-group">
+        <label for="image">Image URL</label>
+        <input
+          type="text"
+          id="image"
+          name="image"
+          value="https://example.com/image.jpg"
+          required
+        />
+          <div class="invalid-feedback">please add image url</div>
+
+        <button class="add-listing-btn w-50 mt-3" id="verify" type="button">
+          verify
+        </button>
+
+        <div class="privew">
+          <p class="mt-4">image preview</p>
+          <img
+            src="<%= data.image %>"
+            alt=""
+            class="rounded w-50 h-50"
+            id="previewImg"
+          />
+        </div>
+      </div>
+
+      <button class="add-listing-btn" type="submit">Edit Listing</button>
+    </form>
+  </div>
 </div>
 <script>
-    let verfiyBtn = document.getElementById("verify");
-let previewImg = document.querySelector("#previewImg");
- 
-verfiyBtn.addEventListener("click", () => {
-  previewImg.src = document.querySelector("#image").value;
-}); 
+  let verfiyBtn = document.getElementById("verify");
+  let previewImg = document.querySelector("#previewImg");
 
+  verfiyBtn.addEventListener("click", () => {
+    previewImg.src = document.querySelector("#image").value;
+  });
+  
+  (() => {
+    "use strict";
+
+    const forms = document.querySelectorAll(".needs-validation");
+
+    Array.from(forms).forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add("was-validated");
+      });
+    });
+  })();
+ 
 </script>
