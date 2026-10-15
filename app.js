@@ -33,24 +33,31 @@ app.get("/listing", async (req, res) => {
 });
 
 //*add route
-app.post("/listing", (req, res) => {
-  let { title, discription, price, location, country } = req.body;
-  let newList = new Listing({
-    title: title,
-    discription: discription,
-    price: price,
-    location: location,
-    country: country,
-  });
-  newList
-    .save()
-    .then(() => {
-      console.log("data saved");
-      res.redirect("/listing");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+app.post("/listing", async (req, res, next) => {
+  // let { title, discription, price, location, country } = req.body;
+  // let newList = new Listing({
+  //   title: title,
+  //   discription: discription,
+  //   price: price,
+  //   location: location,
+  //   country: country,
+  // });
+  // newList
+  //   .save()
+  //   .then(() => {
+  //     console.log("data saved");
+  //     res.redirect("/listing");
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+  try {
+    const newListing = new Listing(req.body.listing);
+    await newListing.save();
+    res.redirect("/listing");
+  } catch (err) {
+    next(err);
+  }
 });
 
 app.get("/listing/new", (req, res) => {
@@ -103,6 +110,9 @@ app.delete("/listing/:id", (req, res) => {
     });
 });
 
+app.use((err, req, res, next) => {
+  res.send("something went wrong!");
+});
 // app.get("/sampleListing",agit push -u origin mainsync (req,res)=>{
 //     let sampleData = new Listing({
 //         title:"home sweet home",
