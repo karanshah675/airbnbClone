@@ -5,6 +5,7 @@ const path = require("path");
 const Listing = require("./models/listing");
 const methodOverride = require("method-override");
 const engine = require("ejs-mate");
+const asyncWrap = require("./utils/wrapAsync");
 app.use(methodOverride("_method"));
 mongoose
   .connect("mongodb://127.0.0.1:27017/airBnb")
@@ -33,32 +34,14 @@ app.get("/listing", async (req, res) => {
 });
 
 //*add route
-app.post("/listing", async (req, res, next) => {
-  // let { title, discription, price, location, country } = req.body;
-  // let newList = new Listing({
-  //   title: title,
-  //   discription: discription,
-  //   price: price,
-  //   location: location,
-  //   country: country,
-  // });
-  // newList
-  //   .save()
-  //   .then(() => {
-  //     console.log("data saved");
-  //     res.redirect("/listing");
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
-  try {
+app.post(
+  "/listing",
+  wrapAsync(async (req, res, next) => {
     const newListing = new Listing(req.body.listing);
     await newListing.save();
     res.redirect("/listing");
-  } catch (err) {
-    next(err);
-  }
-});
+  }),
+);
 
 app.get("/listing/new", (req, res) => {
   res.render("listings/new.ejs");
