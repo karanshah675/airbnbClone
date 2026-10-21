@@ -6,6 +6,7 @@ const Listing = require("./models/listing");
 const methodOverride = require("method-override");
 const engine = require("ejs-mate");
 const asyncWrap = require("./utils/wrapAsync");
+const ExpressError = require("./utils/expressError");
 app.use(methodOverride("_method"));
 mongoose
   .connect("mongodb://127.0.0.1:27017/airBnb")
@@ -20,6 +21,11 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
+
+app.all('/{*splat}', (req, res, next) => {
+    next(new ExpressError(404, "Page Not Found"));
+});
+
 app.listen(8080, () => {
   console.log("server started");
 });
@@ -36,7 +42,7 @@ app.get("/listing", async (req, res) => {
 //*add route
 app.post(
   "/listing",
-  wrapAsync(async (req, res, next) => {
+  asyncWrap(async (req, res, next) => {
     const newListing = new Listing(req.body.listing);
     await newListing.save();
     res.redirect("/listing");
@@ -94,7 +100,8 @@ app.delete("/listing/:id", (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  res.send("something went wrong!");
+  let { statusCode, message } = err;
+  res.status(statusCode).send(message);
 });
 // app.get("/sampleListing",agit push -u origin mainsync (req,res)=>{
 //     let sampleData = new Listing({

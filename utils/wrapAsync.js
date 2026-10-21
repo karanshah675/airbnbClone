@@ -3,3 +3,4 @@ function wrapAsync(fn) {
     fn(req, res, next).catch(next);
   };
 }
+module.exports = wrapAsync;
