@@ -102,6 +102,7 @@ body {
 .container {
   margin: 10px !important;
   padding: 0 30px !important;
+ 
 }
 .image {
   position: relative;
@@ -146,18 +147,18 @@ body {
   overflow: hidden;
   padding: 5px;
 }
-.place-card:hover .card-image::after{
+.place-card:hover .card-image::after {
   transition: all 0.2s ease;
   display: block;
-} 
-.place-card:hover .card-image{
+}
+.place-card:hover .card-image {
   /* transform: skew(10deg); */
   transform: scale(0.9);
 }
-.card-image::after{
+.card-image::after {
   transition: all 0.2s ease;
   display: none;
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -171,7 +172,7 @@ body {
   border-radius: 10px;
   object-fit: cover;
 }
-.card-image{
+.card-image {
   position: relative;
   transition: all 0.2s ease;
 }
@@ -381,7 +382,6 @@ footer {
 }
 /* show-card */
 .show-card {
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -392,18 +392,18 @@ footer {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   padding: 40px;
 }
-.show-header img{
+.show-header img {
   object-fit: cover;
   /* object-fit: ; */
   /* transition: all 0.2s ease; */
 }
 
-.show-btns button{
-    background-color: #ff385c;
-    color: #fff;
-    transition: all 0.2s ease;
+.show-btns button {
+  background-color: #ff385c;
+  color: #fff;
+  transition: all 0.2s ease;
 }
-.show-btns button:hover{
-    background-color: #e31c5f;
-    color: #fff;
+.show-btns button:hover {
+  background-color: #e31c5f;
+  color: #fff;
 }
