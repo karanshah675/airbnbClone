@@ -279,6 +279,16 @@ footer {
   background: #f7f7f7;
 }
 
+.show-listing-page{
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  background: #f7f7f7;
+  padding-bottom: 100px;
+  /* position: relative; */
+}
 .new-listing-card {
   width: 100%;
   max-width: 650px;
@@ -390,7 +400,24 @@ footer {
   max-width: 650px;
   border-radius: 20px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  
   padding: 40px;
+  background-color: #fff;
+  z-index: 1;
+}
+.review-card{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+  max-width: 450px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  padding: 40px;
+  background-color: #fff !important;
+ 
+ 
 }
 .show-header img {
   object-fit: cover;

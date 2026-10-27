@@ -1,19 +1,33 @@
 <% layout("/layouts/boilerplate") %>
 
-<div class="new-listing-page d-flex justify-content-center align-items-center">
-  <div class="show-card">
-    <div class="show-header">
-      <h4 class="fw-bold"><%= data.title %></h4>
-      <p class="text-secondary">
+<div class="show-listing-page d-flex justify-content-center align-items-center">
+  <div class="show-card d-flex justify-content-center align-items-start flex-column ">
+    <div class="show-content d-flex justify-content-between align-items-start gap-3">
+      
+      <div class="show-header ">
+        <h4 class="fw-bold"><%= data.title %></h4>
+        <p class="text-secondary">
         <%= data.location %> &middot; <%= data.country %>
       </p>
-      <img src="<%= data.image %>" class="rounded" alt="" width="300px" height="200px" />
+      <img
+        src="<%= data.image %>"
+        class="rounded"
+        alt=""
+        width="300px"
+        height="200px"
+      />
     </div>
-    <div class="show-side d-flex justify-content-center align-items-start flex-column mt-5">
+    <div
+    class="show-side d-flex justify-content-center align-items-start flex-column "
+    >
       <p><%= data.description %></p>
-      <p class="fw-bold"> <span>₹</span> <%= data.price.toLocaleString("en-IN") %>/night </p>
-      <div class="show-btns d-flex justify-content-center align-items-center gap-3">
-        <form action="/listing/<%= data.id %>/edit" method="get">
+      <p class="fw-bold">
+        <span>₹</span> <%= data.price.toLocaleString("en-IN") %>/night
+      </p>
+      <div
+      class="show-btns d-flex justify-content-center align-items-center gap-3"
+      >
+      <form action="/listing/<%= data.id %>/edit" method="get">
           <button class="border-0 p-2 rounded">Edit list</button>
         </form>
         <form action="/listing/<%= data._id %>?_method=DELETE" method="post">
@@ -21,6 +35,47 @@
         </form>
       </div>
     </div>
-  </div>
+    </div>
+  
+
+    <div class="">
+      
+      <h4 class="fw-bold">leave a review</h4>
+      <form action="/listing"   novalidate class="needs-validation" method="POST">
+        <!-- Title -->
+
+      <div class="form-group">
+        <label for="rating">rating</label>
+        <input
+          type="range"
+          name="review[rating]"
+          min="1"
+          max="5"
+          required
+        />
+        <div class="invalid-feedback">please add title</div>
+    </div>
+    
+      <!-- comment -->
+      <div class="form-group">
+        <label for="comment">comment</label>
+        <textarea
+          id="comment"
+          name="review[comment]"
+          cols="10"
+          placeholder="Tell about this place..."
+          style="resize: both;"
+          required
+          ></textarea>
+          <div class="invalid-feedback">please add comment</div>
+        </div>
+        
+        
  
+      <button class="btn btn-dark" type="submit">Add review</button>
+    </form>
+  </div>
+  </div>
+  </div>
 </div>
+ 
