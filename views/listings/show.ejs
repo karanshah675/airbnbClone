@@ -1,81 +1,135 @@
 <% layout("/layouts/boilerplate") %>
 
 <div class="show-listing-page d-flex justify-content-center align-items-center">
-  <div class="show-card d-flex justify-content-center align-items-start flex-column ">
-    <div class="show-content d-flex justify-content-between align-items-start gap-3">
-      
-      <div class="show-header ">
+  <div
+    class="show-card d-flex justify-content-center align-items-start flex-column"
+  >
+    <div
+      class="show-content d-flex justify-content-between align-items-end gap-3"
+    >
+      <div class="show-header">
         <h4 class="fw-bold"><%= data.title %></h4>
         <p class="text-secondary">
-        <%= data.location %> &middot; <%= data.country %>
-      </p>
-      <img
-        src="<%= data.image %>"
-        class="rounded"
-        alt=""
-        width="300px"
-        height="200px"
-      />
-    </div>
-    <div
-    class="show-side d-flex justify-content-center align-items-start flex-column "
-    >
-      <p><%= data.description %></p>
-      <p class="fw-bold">
-        <span>₹</span> <%= data.price.toLocaleString("en-IN") %>/night
-      </p>
+          <%= data.location %> &middot; <%= data.country %>
+        </p>
+        <img
+          src="<%= data.image %>"
+          class="rounded"
+          alt=""
+          width="300px"
+          height="200px"
+        />
+      </div>
       <div
-      class="show-btns d-flex justify-content-center align-items-center gap-3"
+        class="show-side d-flex justify-content-center align-items-start flex-column"
       >
-      <form action="/listing/<%= data.id %>/edit" method="get">
-          <button class="border-0 p-2 rounded">Edit list</button>
-        </form>
-        <form action="/listing/<%= data._id %>?_method=DELETE" method="post">
-          <button class="border-0 p-2 rounded">Delete list</button>
-        </form>
+        <p><%= data.description %></p>
+        <p class="fw-bold">
+          <span>₹</span> <%= data.price.toLocaleString("en-IN") %>/night
+        </p>
+        <div
+          class="show-btns d-flex justify-content-center align-items-center gap-3"
+        >
+          <form action="/listing/<%= data.id %>/edit" method="get">
+            <button class="border-0 p-2 rounded">Edit list</button>
+          </form>
+          <form action="/listing/<%= data._id %>?_method=DELETE" method="post">
+            <button class="border-0 p-2 rounded">Delete list</button>
+          </form>
+        </div>
       </div>
     </div>
-    </div>
-  
 
-    <div class="">
-      
+    <div class="w-100">
       <h4 class="fw-bold">leave a review</h4>
-      <form action="/listing"   novalidate class="needs-validation" method="POST">
+      <form action="/listing/<%= data._id %>/review" novalidate class="needs-validation" method="POST">
         <!-- Title -->
 
-      <div class="form-group">
-        <label for="rating">rating</label>
-        <input
-          type="range"
-          name="review[rating]"
-          min="1"
-          max="5"
-          required
-        />
-        <div class="invalid-feedback">please add title</div>
-    </div>
-    
-      <!-- comment -->
-      <div class="form-group">
-        <label for="comment">comment</label>
-        <textarea
-          id="comment"
-          name="review[comment]"
-          cols="10"
-          placeholder="Tell about this place..."
-          style="resize: both;"
-          required
+        <div class="form-group">
+          <label for="range1" class="form-label">rating</label>
+          <input type="range" class="form-range" name="review[rating]" id="range1" min="1" max="5" required/>
+          <div class="invalid-feedback">please add range</div>
+        </div>
+
+        <!-- comment -->
+        <div class="form-group">
+          <label for="comment">comment</label>
+          <textarea
+            id="comment"
+            name="review[comment]"
+            cols="30"
+            placeholder="Tell about this place..."
+            style="resize: none"
+            required
           ></textarea>
           <div class="invalid-feedback">please add comment</div>
         </div>
-        
-        
- 
-      <button class="btn btn-dark" type="submit">Add review</button>
-    </form>
+
+        <button class="btn btn-dark" type="submit">Add review</button>
+      </form>
+    </div>
+  
+<div class="review-show">
+  <div class="review-heading">
+    <div>
+      <h4>Guest reviews</h4>
+      <p>See what our guests have to say</p>
+    </div>
+    <span class="review-count">
+      <i class="fa-solid fa-comments"></i>
+      <%= data.reviews.length %> reviews
+    </span>
   </div>
-  </div>
+
+  <div class="review-section">
+    <% for (let i of data.reviews) { %>
+      <div class="review-card d-flex flex-column">
+
+        <div class="review-card-top">
+          
+          <div class="review-meta">
+            <h6 class="fw-bold">Guest review</h6>
+          </div>
+        </div>
+        
+        <p class="review"><%= i.comment %></p>
+        <div class="review-stars">
+          <% for (let star = 1; star <= 5; star++) { %>
+            <% if (star <= i.rating) { %>
+              <i class="fa-solid fa-star"></i>
+            <% } else { %>
+              <i class="fa-regular fa-star"></i>
+            <% } %>
+          <% } %>
+        </div>
+        
+        <div class="btn-section">
+          <form action="/listing/<%= data._id %>/review/<%= i._id %>?_method=DELETE" method="post">
+            <button class="btn btn-dark">Delete</button>
+          </form>
+        </div>
+      </div>
+    <% } %>
   </div>
 </div>
- 
+
+  </div>
+</div>
+<script>
+  (() => {
+    "use strict";
+
+    const forms = document.querySelectorAll(".needs-validation");
+
+    Array.from(forms).forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add("was-validated");
+      });
+    });
+  })();
+</script>

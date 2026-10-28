@@ -1,29 +1,39 @@
 //! creating model speratliy from index.js
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema; 
-
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const Review = require("./reviews");
 let listingSchema = new Schema({
-    title:{
-        type:String,
-        require:true
+  title: {
+    type: String,
+    require: true,
+  },
+  description: String,
+  image: {
+    type: String,
+    default:
+      "https://images.unsplash.com/photo-1646748019039-e908f7e41282?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    set: (v) =>
+      v === ""
+        ? "https://images.unsplash.com/photo-1646748019039-e908f7e41282?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        : v,
+  },
+  price: Number,
+  location: String,
+  country: String,
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
     },
-    description:String,
-    image:{
-        type:String,
-        default:"https://images.unsplash.com/photo-1646748019039-e908f7e41282?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        set:(v)=> v===""?"https://images.unsplash.com/photo-1646748019039-e908f7e41282?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D":v,
-    },
-    price:Number,
-    location:String,
-    country:String,
-    reviews:[
-        {
-            type:Schema.Types.ObjectId,
-            ref:"Review"
-        }
-    ]
-})
+  ],
+});
 
-const listing = mongoose.model("Listing",listingSchema)
+listingSchema.post("findOneAndDelete", async (listing) => {
+  if (listing) {
+    await Review.deleteMany({ _id: { $in: listing.reviews } });
+  }
+});
 
-module.exports = listing
+const listing = mongoose.model("Listing", listingSchema);
+
+module.exports = listing;
