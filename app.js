@@ -8,6 +8,7 @@ const ExpressError = require("./utils/expressError");
 const listings = require("./routes/listing");
 const reviews = require("./routes/review");
 const session = require("express-session");
+const flash = require("connect-flash")
 mongoose
   .connect("mongodb://127.0.0.1:27017/airBnb")
   .then((res) => {
@@ -32,8 +33,13 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
-// app.use(session(sessionOption));
-
+app.use(session(sessionOption));
+app.use(flash())
+app.use((req,res,next)=>{
+  res.locals.success = req.flash("success")
+  res.locals.error = req.flash("error")
+  next()
+})
 app.use("/listing", listings);
 app.use("/listing/:id/review", reviews);
 
