@@ -102,7 +102,6 @@ body {
 .container {
   margin: 10px !important;
   padding: 0 30px !important;
- 
 }
 .image {
   position: relative;
@@ -279,7 +278,7 @@ footer {
   background: #f7f7f7;
 }
 
-.show-listing-page{
+.show-listing-page {
   min-height: 80vh;
   display: flex;
   justify-content: center;
@@ -400,12 +399,12 @@ footer {
   max-width: 650px;
   border-radius: 20px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-  
+
   padding: 40px;
   background-color: #fff;
   z-index: 1;
 }
-.review-card{
+.review-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -416,8 +415,7 @@ footer {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   padding: 40px;
   background-color: #fff !important;
- overflow: hidden;
- 
+  overflow: hidden;
 }
 .show-header img {
   object-fit: cover;
@@ -435,7 +433,7 @@ footer {
   color: #fff;
 }
 /* review section */
- 
+
 /* Reviews section */
 .review-show {
   margin: 45px 0;
@@ -496,7 +494,9 @@ footer {
   border: 1px solid #e8edf3;
   border-radius: 16px;
   box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .review-card:hover {
@@ -512,8 +512,6 @@ footer {
   gap: 12px;
   margin-bottom: 18px;
 }
-
- 
 
 .review-meta h6 {
   margin: 0 0 4px;
@@ -551,9 +549,36 @@ footer {
 .review {
   color: #475569;
   font-size: 0.95rem;
-   
 }
-
+/* signup card */
+.signup-card {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center center;
+  background-image: url(https://images.pexels.com/photos/40885202/pexels-photo-40885202.png);
+  position: absolute;
+  z-index: 99999;
+ 
+}
+.signup-card::after{
+  z-index: -1;
+   content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.722) 100%);
+}
+.signup-card-form{
+  color: #fff;
+  text-transform: capitalize;
+  border: 1px solid rgba(128, 128, 128, 0.664);
+  background-color: #ffffff21;
+  /* filter: blur(10px); */
+    backdrop-filter: blur(7px);
+}
 /* Mobile layout */
 @media (max-width: 650px) {
   .review-show {
