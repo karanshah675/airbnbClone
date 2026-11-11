@@ -27,18 +27,26 @@
   </head>
 
   <body class="">
+    <div class="d-flex justify-content-center align-items-center" >
+      <%- include("../inc/flash.ejs") %>
+    </div>
     <div class="show-listing-page signup-card d-flex flex-column">
       <div
         class="new-listing-card signup-card-form mt-5"
         style="max-width: 350px"
       >
         <h2 style="color: #fff; font-weight: bold">Signup</h2>
-        <form action="" novalidate class="needs-validation">
+        <form
+          action="/signup"
+          method="post"
+          novalidate
+          class="needs-validation"
+        >
           <div class="form-group">
             <label for="title">email</label>
             <input
               type="email"
-              name="email"
+              name="user[email]"
               id="email"
               placeholder="email"
               required
@@ -48,7 +56,7 @@
             <label for="username">username</label>
             <input
               type="text"
-              name="username"
+              name="user[username]"
               id="username"
               placeholder="username"
               required
@@ -58,7 +66,7 @@
             <label for="password">password</label>
             <input
               type="password"
-              name="password"
+              name="user[password]"
               id="password"
               placeholder="password"
               required
