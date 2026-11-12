@@ -11,6 +11,8 @@
         <h4 class="fw-bold"><%= data.title %></h4>
         <p class="text-secondary">
           <%= data.location %> &middot; <%= data.country %>
+          <br>
+          owned by : <%= data.owner.username %>
         </p>
         <img
           src="<%= data.image %>"
@@ -27,9 +29,11 @@
         <p class="fw-bold">
           <span>₹</span> <%= data.price.toLocaleString("en-IN") %>/night
         </p>
-        <div
+        <% if (currUser && currUser._id.equals(data.owner._id)) { %>
+         
+          <div
           class="show-btns d-flex justify-content-center align-items-center gap-3"
-        >
+          >
           <form action="/listing/<%= data.id %>/edit" method="get">
             <button class="border-0 p-2 rounded">Edit list</button>
           </form>
@@ -37,6 +41,7 @@
             <button class="border-0 p-2 rounded">Delete list</button>
           </form>
         </div>
+        <% } %>
       </div>
     </div>
 

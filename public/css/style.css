@@ -29,6 +29,13 @@ body {
   left: 0;
   z-index: 9999;
 }
+.nav-btn a{
+  text-decoration: none;
+  color: #fff;
+   /* background-color: #ff385c;
+  color: #fff !important;
+  transition: all 0.2s ease; */
+}
 
 .logo {
   text-decoration: none;
@@ -49,16 +56,14 @@ body {
   gap: 35px;
 }
 
-.navbar-center a,
-.host-link {
+.navbar-center a  {
   text-decoration: none;
   color: #222;
   font-size: 15px;
   font-weight: 500;
 }
 
-.navbar-center a:hover,
-.host-link:hover {
+.navbar-center a:hover  {
   color: #ff385c;
 }
 

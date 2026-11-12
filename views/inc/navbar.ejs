@@ -13,13 +13,24 @@
         <a href="#">Services</a>
     </div>
 
-    <div class="navbar-right">
-        <a href="#" class="host-link">Host</a>
- 
-        <button class="profile-btn">
-            <span class="menu">☰</span>
+    <div class="navbar-right show-btns"> 
+        <% if (!currUser) { %>
             
-        </button>
+            <button class="btn nav-btn">
+                <a href="/signup"  >SignUp</a>
+            </button>
+            <button class="btn nav-btn">
+    
+                <a href="/login" class="host-link">Login</a>
+            </button>
+            <% } %>
+            <% if (currUser) { %>
+             
+                <button class="btn nav-btn">
+                    
+                    <a href="/logout" class="host-link">Logout</a>
+                </button>
+                <% } %>
     </div>
 </nav>
 
