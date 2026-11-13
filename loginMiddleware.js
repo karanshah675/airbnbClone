@@ -21,9 +21,9 @@ module.exports.isOwner = async (req,res,next)=>{
 
  if(!res.locals.currUser._id.equals(listing.owner._id)){
     req.flash("error","permisson denied")
-    return res.redirect(`/listing`)
+    return res.redirect(`/listing/${id}/show`)
  } 
  next()
 }
 
-
+ 

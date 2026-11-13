@@ -44,7 +44,9 @@
         <% } %>
       </div>
     </div>
-
+    <% if (currUser) { %>
+     
+    
     <div class="w-100">
       <h4 class="fw-bold">leave a review</h4>
       <form action="/listing/<%= data._id %>/review" novalidate class="needs-validation" method="POST">
@@ -73,7 +75,7 @@
         <button class="btn btn-dark" type="submit">Add review</button>
       </form>
     </div>
-  
+ <% } %> 
 <div class="review-show">
   <div class="review-heading">
     <div>
@@ -93,7 +95,7 @@
         <div class="review-card-top">
           
           <div class="review-meta">
-            <h6 class="fw-bold">Guest review</h6>
+            <h6 class="fw-bold"><%= i.author.username %></h6>
           </div>
         </div>
         
@@ -107,12 +109,13 @@
             <% } %>
           <% } %>
         </div>
-        
+        <% if(currUser && currUser._id.equals(i.author._id)){ %>
         <div class="btn-section">
           <form action="/listing/<%= data._id %>/review/<%= i._id %>?_method=DELETE" method="post">
             <button class="btn btn-dark">Delete</button>
           </form>
         </div>
+        <% } %>
       </div>
     <% } %>
   </div>

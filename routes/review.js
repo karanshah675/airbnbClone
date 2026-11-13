@@ -6,6 +6,7 @@ const { listingSchema, reviewSchema } = require("../schemaValidation");
 const asyncWrap = require("../utils/wrapAsync");
 const ExpressError = require("../utils/expressError");
 const Review = require("../models/reviews");
+const { isLoggedin } = require("../loginMiddleware");
 
 
 
@@ -23,12 +24,14 @@ let validatingReview = (req, res, next) => {
 //*add review
 router.post(
   "/",
+  isLoggedin,
   validatingReview,
   asyncWrap(async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findById(id);
     let rev = await new Review(req.body.review);
     // await Listing.findByIdAndUpdate(id, Listing.reviews.push(r1));
+    rev.author=req.user._id;
     listing.reviews.push(rev);
     await rev.save();
     await listing.save();
@@ -37,8 +40,14 @@ router.post(
   }),
 );
 //*delete review
-router.delete("/:reviewId", async (req, res) => {
+router.delete("/:reviewId",isLoggedin, async (req, res) => {
   let { id, reviewId } = req.params;
+  let review = await Review.findById(reviewId)
+
+  if(!res.locals.currUser._id.equals(review.author._id)){
+    req.flash("error","permission is denied")
+    return res.redirect(`/listing/${id}/show`)
+  }
   await Review.findByIdAndDelete(reviewId);
   await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     req.flash("success","review deleted")
