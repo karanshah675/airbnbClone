@@ -7,7 +7,13 @@
       <p>Share a beautiful place with your guests.</p>
     </div>
 
-    <form action="/listing" novalidate class="needs-validation" method="POST">
+    <form
+      action="/listing"
+      novalidate
+      class="needs-validation"
+      method="POST"
+      enctype="multipart/form-data"
+    >
       <!-- Title -->
       <div class="form-group">
         <label for="title">Listing title</label>
@@ -19,8 +25,8 @@
           required
         />
         <div class="invalid-feedback">please add title</div>
-    </div>
-    
+      </div>
+
       <!-- Description -->
       <div class="form-group">
         <label for="description">Description</label>
@@ -30,66 +36,64 @@
           rows="5"
           placeholder="Tell guests about this place..."
           required
-          ></textarea>
-          <div class="invalid-feedback">please add description</div>
-        </div>
-        
-        <!-- Price + Location -->
-        <div class="form-row">
-            <div class="form-group">
-                <label for="price">Price per night</label>
-                <div class="input-with-symbol">
-                    <span>₹</span>
-                    <input
-                    type="text"
-                    id="price"
-                    name="listing[price]"
-                    placeholder="2500"
-                    required
-                    />
-                    <div class="invalid-feedback">please add price</div>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="location">Location</label>
-                <input
-                type="text"
-                id="location"
-                name="listing[location]"
-                placeholder="Goa"
-                required
-                />
-                <div class="invalid-feedback">please add location</div>
-            </div>
-        </div>
-        
-        <!-- Country -->
+        ></textarea>
+        <div class="invalid-feedback">please add description</div>
+      </div>
+
+      <!-- Price + Location -->
+      <div class="form-row">
         <div class="form-group">
-            <label for="country">Country</label>
+          <label for="price">Price per night</label>
+          <div class="input-with-symbol">
+            <span>₹</span>
             <input
+              type="text"
+              id="price"
+              name="listing[price]"
+              placeholder="2500"
+              required
+            />
+            <div class="invalid-feedback">please add price</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input
             type="text"
-            id="country"
-            name="listing[country]"
-            placeholder="India"
+            id="location"
+            name="listing[location]"
+            placeholder="Goa"
             required
-            />
-            <div class="invalid-feedback">please add country</div>
+          />
+          <div class="invalid-feedback">please add location</div>
         </div>
-        
-        <!-- Image -->
-        <div class="form-group">
-            <label for="image">Image URL</label>
-            <input
-            type="text"
-            id="image"
-            name="listing[image]"
-            placeholder="https://example.com/image.jpg"
-            
-            />
-            
-        </div>
-        
+      </div>
+
+      <!-- Country -->
+      <div class="form-group">
+        <label for="country">Country</label>
+        <input
+          type="text"
+          id="country"
+          name="listing[country]"
+          placeholder="India"
+          required
+        />
+        <div class="invalid-feedback">please add country</div>
+      </div>
+
+      <!-- Image -->
+      <div class="form-group">
+        <label for="image">Image</label>
+        <input
+          type="file"
+          id="image"
+          name="listing[image]"
+          placeholder="https://example.com/image.jpg"
+        />
+      </div>
+
       <button class="add-listing-btn" type="submit">Add Listing</button>
     </form>
   </div>

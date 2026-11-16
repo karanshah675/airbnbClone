@@ -1,3 +1,6 @@
+if(process.env.NODE_ENV!="production"){
+  require('dotenv').config()
+}
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
@@ -13,6 +16,7 @@ const flash = require("connect-flash");
 const User = require("./models/user");
 const passport = require("passport");
 const localStragey = require("passport-local");
+
 mongoose
   .connect("mongodb://127.0.0.1:27017/airBnb")
   .then((res) => {
