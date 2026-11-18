@@ -20,10 +20,12 @@ let validating = (req, res, next) => {
 router
   .route("/")
   .get(listingController.index)
-  .post(upload.single("listing[image]"), (req, res) => {
-    res.send(req.file);
-  });
-// .post(isLoggedin, validating, asyncWrap(listingController.addListing));
+  .post(
+    isLoggedin,
+    upload.single("listing[image]"),
+    validating,
+    asyncWrap(listingController.addListing),
+  );
 //*new route
 router.get("/new", isLoggedin, listingController.renderNewForm);
 //*show route
