@@ -584,6 +584,12 @@ footer {
   /* filter: blur(10px); */
     backdrop-filter: blur(7px);
 }
+
+/* map */
+#map{
+  height: 300px;
+  width: 300px;
+}
 /* Mobile layout */
 @media (max-width: 650px) {
   .review-show {

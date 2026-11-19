@@ -24,7 +24,7 @@ module.exports.addListing = async (req, res, next) => {
   let url = req.file.path;
   let path = req.file.filename;
   const newListing = new Listing(req.body.listing);
-  newListing.owner = req.user._id;
+  newListing.owner = req.user._id; //because of passport
   newListing.image = { url, path };
   await newListing.save();
   req.flash("success", "new listing is created");
@@ -38,30 +38,23 @@ module.exports.renderEditForm = async (req, res) => {
     req.flash("error", "no listing");
   }
   req.flash("success", "listing edited");
-  res.render("listings/edit.ejs", { data });
+  let newUrl = data.image.url.replace("/upload","/upload/w_250")
+  res.render("listings/edit.ejs", { data,newUrl });
 };
 
-module.exports.editListing = (req, res) => {
+module.exports.editListing = async (req, res) => {
   let { id } = req.params;
-  let { title, discription, image, price, location, country } = req.body;
-
-  Listing.findByIdAndUpdate(id, {
-    title: title,
-    discription: discription,
-    price: price,
-    location: location,
-    country: country,
-    image: image,
-  })
-    .then((res2) => {
-      req.flash("success", "listing updated");
-
-      console.log("data updated");
-      res.redirect("/listing");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  let url = req.file.path;
+  let path = req.file.filename;
+  // let { title, discription, image, price, location, country } = req.body;
+  let listing = await Listing.findByIdAndUpdate(id, req.body.listing);
+  if (typeof req.file !== "undefined") {
+    listing.image.url = url;
+    listing.image.path = path;
+    await listing.save();
+  }
+  req.flash("success", "listing edited");
+  res.redirect(`/listing/${id}/show`);
 };
 
 module.exports.deleteListing = async (req, res) => {

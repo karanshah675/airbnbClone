@@ -15,7 +15,7 @@
           owned by : <%= data.owner.username %>
         </p>
         <img
-          src="<%= data.image %>"
+          src="<%= data.image.url %>"
           class="rounded"
           alt=""
           width="300px"
@@ -92,6 +92,9 @@
       </form>
     </div>
  <% } %> 
+ <% if (data.reviews.length>0) { %>
+  
+
 <div class="review-show">
   <div class="review-heading">
     <div>
@@ -136,8 +139,13 @@
     <% } %>
   </div>
 </div>
-
+ <% } %>
+ <div class="">
+  <p class="fw-bold">where you'll be</p>
+   <div id="map" class="rounded"></div>
+   
   </div>
+</div>
 </div>
 <script>
   (() => {
@@ -156,4 +164,11 @@
       });
     });
   })();
+  let token = "<%= process.env.MAP_TOKEN %>"
+    const map = new mapboxgl.Map({
+        accessToken: token,
+        container: 'map', // container ID
+        center: [-71.06776, 42.35816], // starting position [lng, lat]. Note that lat must be set between -90 and 90
+        zoom: 9 // starting zoom
+    });
 </script>

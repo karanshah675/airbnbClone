@@ -6,18 +6,24 @@
       <h1>Edit listing</h1>
     </div>
 
-    <form action="/listing/<%= data._id %>?_method=PUT" novalidate class="needs-validation"  method="post">
+    <form
+      action="/listing/<%= data._id %>?_method=PUT"
+      novalidate
+      class="needs-validation"
+      method="post"
+      enctype="multipart/form-data"
+    >
       <!-- Title -->
       <div class="form-group">
         <label for="title">Listing title</label>
         <input
           type="text"
           id="title"
-          name="title"
+          name="listing[title]"
           value="<%= data.title %>"
           required
-          />
-          <div class="invalid-feedback">please add title</div>
+        />
+        <div class="invalid-feedback">please add title</div>
       </div>
 
       <!-- Description -->
@@ -25,13 +31,13 @@
         <label for="description">Description</label>
         <textarea
           id="description"
-          name="description"
+          name="listing[description]"
           rows="5"
-     
           required
-        ><%= data.description %></textarea>
-          <div class="invalid-feedback">please add description</div>
-
+        >
+<%= data.description %></textarea
+        >
+        <div class="invalid-feedback">please add description</div>
       </div>
 
       <!-- Price + Location -->
@@ -43,13 +49,12 @@
             <input
               type="number"
               id="price"
-              name="price"
+              name="listing[price]"
               value="<%= data.price %>"
               required
             />
           </div>
           <div class="invalid-feedback">please add price</div>
-
         </div>
 
         <div class="form-group">
@@ -57,12 +62,11 @@
           <input
             type="text"
             id="location"
-            name="location"
+            name="listing[location]"
             value="<%= data.location %>"
             required
           />
           <div class="invalid-feedback">please add location</div>
-
         </div>
       </div>
 
@@ -72,39 +76,28 @@
         <input
           type="text"
           id="country"
-          name="country"
+          name="listing[country]"
           value="<%= data.country %>"
           required
         />
-          <div class="invalid-feedback">please add country</div>
-
+        <div class="invalid-feedback">please add country</div>
       </div>
 
+      <div class="privew">
+        <p class="mt-4 fw-bold">Old image preview</p>
+        <img
+          src="<%= newUrl %>"
+          alt=""
+          class="rounded w-50 h-50"
+          id="previewImg"
+        />
+      </div>
+      <br />
       <!-- Image -->
       <div class="form-group">
         <label for="image">Image URL</label>
-        <input
-          type="text"
-          id="image"
-          name="image"
-          value="https://example.com/image.jpg"
-          required
-        />
-          <div class="invalid-feedback">please add image url</div>
-
-        <button class="add-listing-btn w-50 mt-3" id="verify" type="button">
-          verify
-        </button>
-
-        <div class="privew">
-          <p class="mt-4">image preview</p>
-          <img
-            src="<%= data.image %>"
-            alt=""
-            class="rounded w-50 h-50"
-            id="previewImg"
-          />
-        </div>
+        <input type="file" id="image" name="listing[image]" required />
+        <div class="invalid-feedback">please add image url</div>
       </div>
 
       <button class="add-listing-btn" type="submit">Edit Listing</button>
@@ -118,7 +111,7 @@
   verfiyBtn.addEventListener("click", () => {
     previewImg.src = document.querySelector("#image").value;
   });
-  
+
   (() => {
     "use strict";
 
@@ -135,5 +128,4 @@
       });
     });
   })();
- 
 </script>

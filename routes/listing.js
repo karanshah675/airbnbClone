@@ -44,6 +44,7 @@ router
   .put(
     isLoggedin,
     isOwner,
+    upload.single("listing[image]"),
     validating,
     asyncWrap(listingController.editListing),
   )
